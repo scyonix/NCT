@@ -1,0 +1,36 @@
+##  go to -->> https://www.kernel.org/
+
+## Download latest tar file
+
+##Extract the tar file
+
+tar xvf linux-6.9.1.tar.xz
+## Go to the extracted dir
+
+cd linux-6.9.1
+
+## Install the required packages and disable the system keys
+
+apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
+
+scripts/config --disable SYSTEM_TRUSTED_KEYS
+
+scripts/config --disable SYSTEM_REVOCATION_KEYS
+
+## Copy the boot config
+
+cp -v /boot/config-$(uname -r) .config
+
+#Complie the new kernel
+
+make menuconfig
+
+make 
+
+make modules_install
+
+make install
+
+## Reboot the server and verify the kernel version
+
+uname -mrs
