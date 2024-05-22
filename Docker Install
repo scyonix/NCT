@@ -12,6 +12,6 @@ apt install docker-ce
 
 
 
-docker startRun container:
+## docker startRun container:
 
 docker run -it --rm -d -p 8080:80 --name web nginx
