@@ -1,15 +1,11 @@
 ##Centos -- Install required packages
 
 yum update -y
-yum install -y ncurses-devel make gcc bc bison flex elfutils-libelf-devel openssl-devel grub
+yum install -y ncurses-devel make gcc bc bison flex elfutils-libelf-devel openssl-devel grub wget
 
 ## Ubuntu -- Install required packages
 
 apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
-
-scripts/config --disable SYSTEM_TRUSTED_KEYS
-
-scripts/config --disable SYSTEM_REVOCATION_KEYS
 
 ##  go to -->> https://www.kernel.org/
 
@@ -23,7 +19,6 @@ tar xvf linux-6.9.1.tar.xz
 cd linux-6.9.1
 
 
-
 ## Copy the boot config
 
 cp -v /boot/config-$(uname -r) .config
@@ -33,6 +28,14 @@ cp -v /boot/config-$(uname -r) .config
 make menuconfig
 
 make 
+
+####  follow the steps Only for Ubuntu if there is any system key error
+
+scripts/config --disable SYSTEM_TRUSTED_KEYS
+
+scripts/config --disable SYSTEM_REVOCATION_KEYS
+
+## install modules and kernel
 
 make modules_install
 
