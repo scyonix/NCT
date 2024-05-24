@@ -1,22 +1,20 @@
 ##Centos -- Install required packages
 
-yum update -y
 yum install -y ncurses-devel make gcc bc bison flex elfutils-libelf-devel openssl-devel grub wget
-
-## Ubuntu -- Install required packages
-
-apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
 
 ##  go to -->> https://www.kernel.org/
 
-## Download latest tar file
+##Download the kernel
+
+wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.0.9.tar.xz
+
 
 ##Extract the tar file
 
-tar xvf linux-6.9.1.tar.xz
+tar xvf linux-6.0.9.tar.xz
 ## Go to the extracted dir
 
-cd linux-6.9.1
+cd linux-6.0.9
 
 
 ## Copy the boot config
@@ -29,18 +27,34 @@ make menuconfig
 
 make 
 
-####  follow the steps Only for Ubuntu if there is any system key error
+
+
+## Ubuntu -- Install required packages
+
+apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
+
+##  go to -->> https://www.kernel.org/
+
+## Download latest tar file
+wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.9.1.tar.xz
+
+##Extract the tar file
+
+tar xvf linux-6.9.1.tar.xz
+## Go to the extracted dir
+
+cd linux-6.9.1
 
 scripts/config --disable SYSTEM_TRUSTED_KEYS
 
 scripts/config --disable SYSTEM_REVOCATION_KEYS
 
-## install modules and kernel
+## Copy the boot config
 
-make modules_install
+cp -v /boot/config-$(uname -r) .config
 
-make install
+#Complie the new kernel
 
-## Reboot the server and verify the kernel version
+make menuconfig
 
-uname -mrs
+make 
