@@ -6,15 +6,15 @@ yum install -y ncurses-devel make gcc bc bison flex elfutils-libelf-devel openss
 
 ##Download the kernel
 
-wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.0.9.tar.xz
+wget  https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.0.2.tar.xz
 
 
 ##Extract the tar file
 
-tar xvf linux-6.0.9.tar.xz
+tar xvf linux-5.0.2.tar.xz
 ## Go to the extracted dir
 
-cd linux-6.0.9
+cd linux-5.0.2
 
 
 ## Copy the boot config
